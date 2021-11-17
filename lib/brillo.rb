@@ -38,8 +38,9 @@ module Brillo
   end
 
   def self.config
+    config_file_name = ENV.fetch('BRILLO_FILE', 'brillo.yml')
     @config ||= begin
-      static_config = YAML.load_file("#{Rails.root.to_s}/config/brillo.yml").deep_symbolize_keys
+      static_config = YAML.load_file("#{Rails.root.to_s}/config/#{config_file_name}").deep_symbolize_keys
       Config.new(static_config)
     end
   end
